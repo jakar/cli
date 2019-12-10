@@ -34,8 +34,9 @@ project(cli VERSION 1.1.1 LANGUAGES CXX)
 option(CLI_BuildExamples "Build the examples." OFF)
 option(CLI_BuildTests "Build the unit tests." OFF)
 
-set(Boost_NO_BOOST_CMAKE ON)
-find_package(Boost 1.55 REQUIRED COMPONENTS system)
+# set(Boost_NO_BOOST_CMAKE ON)
+# find_package(Boost 1.55 REQUIRED COMPONENTS system)
+find_package(CustomBoost CONFIG)
 find_package(Threads REQUIRED)
 
 # Add Library
@@ -49,7 +50,7 @@ target_include_directories(cli
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
-target_link_libraries(cli INTERFACE Boost::system Threads::Threads)
+target_link_libraries(cli INTERFACE BoostWinRtStatic::system Threads::Threads)
 target_compile_features(cli INTERFACE cxx_std_14)
 target_compile_definitions(cli INTERFACE BOOST_ASIO_NO_DEPRECATED=1)
 
